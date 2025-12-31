@@ -31,7 +31,7 @@ declare const _G: typeof globalThis;
  * error object; when absent, it defaults to "assertion failed!"
  */
 declare function assert<V>(v: V): Exclude<V, undefined | null | false>;
-declare function assert<V, A extends any[]>(
+declare function assert<V, A extends unknown[]>(
     v: V,
     ...args: A
 ): LuaMultiReturn<[Exclude<V, undefined | null | false>, ...A]>;
@@ -98,7 +98,7 @@ declare function collectgarbage(opt: 'step', arg: number): boolean;
  * propagates the error to its caller (that is, dofile does not run in protected
  * mode).
  */
-declare function dofile(filename?: string): any;
+declare function dofile(filename?: string): unknown;
 
 /**
  * Terminates the last protected function called and returns message as the
@@ -150,7 +150,7 @@ declare function ipairs<T>(
  * value to a non-existent field in the table. You may however modify existing
  * fields. In particular, you may clear existing fields.
  */
-declare function next(table: object, index?: any): LuaMultiReturn<[any, any] | []>;
+declare function next<T>(table: T, index?: unknown): LuaMultiReturn<[keyof T, T[keyof T]] | []>;
 
 /**
  * If t has a metamethod __pairs, calls it with t as argument and returns the
@@ -177,13 +177,13 @@ declare function pairs<T>(t: T): LuaIterable<LuaMultiReturn<[keyof T, NonNullabl
  * all results from the call, after this first result. In case of any error,
  * pcall returns false plus the error message.
  */
-declare function pcall<This, Args extends any[], R>(
+declare function pcall<This, Args extends unknown[], R>(
     f: (this: This, ...args: Args) => R,
     context: This,
     ...args: Args
 ): LuaMultiReturn<[true, R] | [false, string]>;
 
-declare function pcall<A extends any[], R>(
+declare function pcall<A extends unknown[], R>(
     f: (this: void, ...args: A) => R,
     ...args: A
 ): LuaMultiReturn<[true, R] | [false, string]>;
@@ -195,7 +195,7 @@ declare function pcall<A extends any[], R>(
  * for debugging. For complete control over the output, use string.format and
  * io.write.
  */
-declare function print(...args: any[]): void;
+declare function print(...args: unknown[]): void;
 
 /**
  * Checks whether v1 is equal to v2, without invoking the __eq metamethod.
@@ -250,7 +250,7 @@ declare function select<T>(index: '#', ...args: T[]): number;
  */
 declare function setmetatable<
     T extends object,
-    TIndex extends object | ((this: T, key: any) => any) | undefined = undefined
+    TIndex extends object | ((this: T, key: unknown) => unknown) | undefined = undefined
 >(
     table: T,
     metatable?: LuaMetatable<T, TIndex> | null
@@ -276,7 +276,7 @@ declare function setmetatable<
  * the string e is not a valid numeral in the given base, the function returns
  * nil.
  */
-declare function tonumber(e: any, base?: number): number | undefined;
+declare function tonumber(e: unknown, base?: number): number | undefined;
 
 /**
  * Receives a value of any type and converts it to a string in a human-readable
@@ -287,11 +287,11 @@ declare function tonumber(e: any, base?: number): number | undefined;
  * corresponding value with v as argument, and uses the result of the call as
  * its result.
  */
-declare function tostring(v: any): string;
+declare function tostring(v: unknown): string;
 
 /**
  * Returns the type of its only argument, coded as a string.
  */
 declare function type(
-    v: any
+    v: unknown
 ): 'nil' | 'number' | 'string' | 'boolean' | 'table' | 'function' | 'thread' | 'userdata';

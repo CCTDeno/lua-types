@@ -19,7 +19,7 @@ declare function collectgarbage(opt: 'count'): number;
  * elements. By default, i is 1 and j is the length of the list, as defined by
  * the length operator (see §2.5.5).
  */
-declare function unpack<T extends any[]>(list: T): LuaMultiReturn<T>;
+declare function unpack<T extends unknown[]>(list: T): LuaMultiReturn<T>;
 declare function unpack<T>(list: T[], i: number, j?: number): LuaMultiReturn<T[]>;
 
 /**
@@ -28,7 +28,7 @@ declare function unpack<T>(list: T[], i: number, j?: number): LuaMultiReturn<T[]
  * is the function calling getfenv. If the given function is not a Lua function,
  * or if f is 0, getfenv returns the global environment. The default for f is 1.
  */
-declare function getfenv(f?: Function | number): any;
+declare function getfenv(f?: Function | number): unknown;
 
 /**
  * Sets the environment to be used by the given function. f can be a Lua
@@ -46,7 +46,7 @@ declare namespace debug {
     /**
      * Returns the environment of object o.
      */
-    function getfenv(o: object): any;
+    function getfenv(o: object): unknown;
 
     /**
      * Sets the environment of the given object to the given table. Returns

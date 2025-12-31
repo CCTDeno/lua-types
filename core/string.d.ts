@@ -90,7 +90,7 @@ declare namespace string {
      * (flags, width, length), the string argument should not contain embedded
      * zeros.
      */
-    function format(formatstring: string, ...args: any[]): string;
+    function format(formatstring: string, ...args: unknown[]): string;
 
     /**
      * Returns an iterator function that, each time it is called, returns the next

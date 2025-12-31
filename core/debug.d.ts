@@ -112,12 +112,12 @@ declare namespace debug {
      * Returns the metatable of the given value or nil if it does not have a
      * metatable.
      */
-    function getmetatable<T extends any>(value: T): LuaMetatable<T> | undefined;
+    function getmetatable<T>(value: T): LuaMetatable<T> | undefined;
 
     /**
      * Returns the registry table (see §4.5).
      */
-    function getregistry(): Record<string, any>;
+    function getregistry(): Record<string, unknown>;
 
     /**
      * This function returns the name and the value of the upvalue with index up
@@ -128,13 +128,13 @@ declare namespace debug {
      * with no known names (variables from chunks saved without debug
      * information).
      */
-    function getupvalue(f: Function, up: number): LuaMultiReturn<[string, any] | []>;
+    function getupvalue(f: Function, up: number): LuaMultiReturn<[string, unknown] | []>;
 
     /**
      * Returns the Lua value associated to u. If u is not a full userdata, returns
      * nil.
      */
-    function getuservalue(u: LuaUserdata): any;
+    function getuservalue(u: LuaUserdata): unknown;
 
     /**
      * Sets the given function as a hook. The string mask and the number count
@@ -159,13 +159,13 @@ declare namespace debug {
      */
     function sethook(): void;
     function sethook(
-        hook: (event: 'call' | 'return' | 'line' | 'count', line?: number) => any,
+        hook: (event: 'call' | 'return' | 'line' | 'count', line?: number) => unknown,
         mask: string,
         count?: number
     ): void;
     function sethook(
         thread: LuaThread,
-        hook: (event: 'call' | 'return' | 'line' | 'count', line?: number) => any,
+        hook: (event: 'call' | 'return' | 'line' | 'count', line?: number) => unknown,
         mask: string,
         count?: number
     ): void;
@@ -180,12 +180,12 @@ declare namespace debug {
      *
      * See debug.getlocal for more information about variable indices and names.
      */
-    function setlocal(level: number, local: number, value: any): string | undefined;
+    function setlocal(level: number, local: number, value: unknown): string | undefined;
     function setlocal(
         thread: LuaThread,
         level: number,
         local: number,
-        value: any
+        value: unknown
     ): string | undefined;
 
     /**
@@ -194,7 +194,7 @@ declare namespace debug {
      */
     function setmetatable<
         T extends object,
-        TIndex extends object | ((this: T, key: any) => any) | undefined = undefined
+        TIndex extends object | ((this: T, key: unknown) => unknown) | undefined = undefined
     >(
         value: T,
         table?: LuaMetatable<T, TIndex> | null
@@ -209,7 +209,7 @@ declare namespace debug {
      * function f. The function returns nil if there is no upvalue with the given
      * index. Otherwise, it returns the name of the upvalue.
      */
-    function setupvalue(f: Function, up: number, value: any): string | undefined;
+    function setupvalue(f: Function, up: number, value: unknown): string | undefined;
 
     /**
      * Sets the given value as the Lua value associated to the given udata. udata
@@ -217,7 +217,7 @@ declare namespace debug {
      *
      * Returns udata.
      */
-    function setuservalue(udata: LuaUserdata, value: any): LuaUserdata;
+    function setuservalue(udata: LuaUserdata, value: unknown): LuaUserdata;
 
     /**
      * If message is present but is neither a string nor nil, this function

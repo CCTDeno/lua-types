@@ -2,9 +2,9 @@
 
 interface LuaMetatable<
     T,
-    TIndex extends object | ((this: T, key: any) => any) | undefined =
+    TIndex extends object | ((this: T, key: unknown) => unknown) | undefined =
         | object
-        | ((this: T, key: any) => any)
+        | ((this: T, key: unknown) => unknown)
         | undefined
 > {
     /**
@@ -16,47 +16,47 @@ interface LuaMetatable<
      * the two operands as arguments, and the result of the call (adjusted to one
      * value) is the result of the operation. Otherwise, it raises an error.
      */
-    __add?(this: T, operand: any): any;
+    __add?(this: T, operand: unknown): unknown;
 
     /**
      * the subtraction (-) operation. Behavior similar to the addition operation.
      */
-    __sub?(this: T, operand: any): any;
+    __sub?(this: T, operand: unknown): unknown;
 
     /**
      * the multiplication (*) operation. Behavior similar to the addition
      * operation.
      */
-    __mul?(this: T, operand: any): any;
+    __mul?(this: T, operand: unknown): unknown;
 
     /**
      * the division (/) operation. Behavior similar to the addition operation.
      */
-    __div?(this: T, operand: any): any;
+    __div?(this: T, operand: unknown): unknown;
 
     /**
      * the modulo (%) operation. Behavior similar to the addition operation.
      */
-    __mod?(this: T, operand: any): any;
+    __mod?(this: T, operand: unknown): unknown;
 
     /**
      * the exponentiation (^) operation. Behavior similar to the addition
      * operation.
      */
-    __pow?(this: T, operand: any): any;
+    __pow?(this: T, operand: unknown): unknown;
 
     /**
      * the negation (unary -) operation. Behavior similar to the addition
      * operation.
      */
-    __unm?(this: T, operand: any): any;
+    __unm?(this: T, operand: unknown): unknown;
 
     /**
      * the concatenation (..) operation. Behavior similar to the addition
      * operation, except that Lua will try a metamethod if any operand is neither
      * a string nor a number (which is always coercible to a string).
      */
-    __concat?(this: T, operand: any): any;
+    __concat?(this: T, operand: unknown): unknown;
 
     /**
      * the length (#) operation. If the object is not a string, Lua will try its
@@ -66,7 +66,7 @@ interface LuaMetatable<
      * table, then Lua uses the table length operation (see §3.4.7). Otherwise,
      * Lua raises an error.
      */
-    __len?(this: T): any;
+    __len?(this: T): unknown;
 
     /**
      * the equal (==) operation. Behavior similar to the addition operation,
@@ -74,7 +74,7 @@ interface LuaMetatable<
      * are either both tables or both full userdata and they are not primitively
      * equal. The result of the call is always converted to a boolean.
      */
-    __eq?(this: T, operand: any): boolean;
+    __eq?(this: T, operand: unknown): boolean;
 
     /**
      * the less than (<) operation. Behavior similar to the addition operation,
@@ -82,7 +82,7 @@ interface LuaMetatable<
      * are neither both numbers nor both strings. The result of the call is always
      * converted to a boolean.
      */
-    __lt?(this: T, operand: any): boolean;
+    __lt?(this: T, operand: unknown): boolean;
 
     /**
      * the less equal (<=) operation. Unlike other operations, the less-equal
@@ -94,7 +94,7 @@ interface LuaMetatable<
      * be removed in future versions; it is also slower than a real __le
      * metamethod.)
      */
-    __le?(this: T, operand: any): boolean;
+    __le?(this: T, operand: unknown): boolean;
 
     /**
      * The indexing access table[key]. This event happens when table is not a
@@ -125,7 +125,7 @@ interface LuaMetatable<
      * primitive assignment. (If necessary, the metamethod itself can call rawset
      * to do the assignment.)
      */
-    __newindex?: object | ((this: T, key: any, value: any) => void);
+    __newindex?: object | ((this: T, key: unknown, value: unknown) => void);
 
     /**
      * The call operation func(args). This event happens when Lua tries to call a
@@ -135,7 +135,7 @@ interface LuaMetatable<
      * results of the call are the result of the operation. (This is the only
      * metamethod that allows multiple results.)
      */
-    __call?(this: T, ...args: any[]): any;
+    __call?(this: T, ...args: unknown[]): unknown;
 
     /**
      * If the metatable of v has a __tostring field, then tostring calls the
@@ -154,7 +154,7 @@ interface LuaMetatable<
      * If the object's metatable has this field, `getmetatable` returns the
      * associated value.
      */
-    __metatable?: any;
+    __metatable?: unknown;
 
     /**
      * Userdata finalizer code. When userdata is set to be garbage collected, if

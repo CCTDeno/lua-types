@@ -30,7 +30,7 @@
  * If there is any error loading or running the module, or if it cannot find any
  * loader for the module, then require raises an error.
  */
-declare function require(modname: string): any;
+declare function require(modname: string): unknown;
 
 /**
  * The package library provides basic facilities for loading modules in Lua. It
@@ -71,7 +71,7 @@ declare namespace package {
      * This variable is only a reference to the real table; assignments to this
      * variable do not change the table used by require.
      */
-    const loaded: Record<string, any>;
+    const loaded: Record<string, unknown>;
 
     /**
      * Dynamically links the host program with the C library libname.
@@ -115,7 +115,7 @@ declare namespace package {
      * This variable is only a reference to the real table; assignments to this
      * variable do not change the table used by require.
      */
-    const preload: Record<string, (modname: string, fileName?: string) => any>;
+    const preload: Record<string, (modname: string, fileName?: string) => unknown>;
 
     /**
      * Searches for the given name in the given path.

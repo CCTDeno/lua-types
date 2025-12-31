@@ -1,7 +1,0 @@
-{
-    "compilerOptions": {
-        "strict": true,
-        "target": "esnext",
-        "types": ["@typescript-to-lua/language-extensions"]
-    }
-}

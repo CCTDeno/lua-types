@@ -1,0 +1,16 @@
+{
+  "version": "5",
+  "specifiers": {
+    "npm:@typescript-to-lua/language-extensions@^1.19.0": "1.19.0"
+  },
+  "npm": {
+    "@typescript-to-lua/language-extensions@1.19.0": {
+      "integrity": "sha512-Os5wOKwviTD4LeqI29N0btYOjokSJ97iCf45EOjIABlb5IwNQy7AE/AqZJobRw3ywHH8+KzJUMkEirWPzh2tUA=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:@typescript-to-lua/language-extensions@^1.19.0"
+    ]
+  }
+}

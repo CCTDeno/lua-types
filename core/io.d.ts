@@ -136,7 +136,8 @@ declare namespace io {
      * is an open file handle, "closed file" if obj is a closed file handle, or
      * nil if obj is not a file handle.
      */
-    function type(obj: any): 'file' | 'closed file' | undefined;
+     function type(obj: LuaFile): 'file' | 'closed file' ;
+    function type(obj: Exclude<unknown, LuaFile>): undefined;
 
     /**
      * Equivalent to io.output():write(···).

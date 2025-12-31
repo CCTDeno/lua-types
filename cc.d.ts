@@ -1,2 +1,1 @@
-/// <reference path="./core/index.d.ts" />
-/// <reference path="./special/cobalt.d.ts" />
+/// <reference path="./cc-5.2.d.ts" />

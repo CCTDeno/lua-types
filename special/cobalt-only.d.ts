@@ -36,7 +36,7 @@
     chunkname?: string,
     mode?: 'b' | 't' | 'bt',
     env?: object
-): LuaMultiReturn<[() => any] | [undefined, string]>;
+): LuaMultiReturn<[Function] | [undefined, string]>;
 
 /**
  * Similar to load, but gets the chunk from file filename or from the standard
@@ -46,7 +46,7 @@ declare function loadfile(
     filename?: string,
     mode?: 'b' | 't' | 'bt',
     env?: object
-): LuaMultiReturn<[() => any] | [undefined, string]>;
+): LuaMultiReturn<[Function] | [undefined, string]>;
 
 /**
  * Similar to load, but gets the chunk from the given string.
@@ -60,7 +60,7 @@ declare function loadfile(
  declare function loadstring(
     string: string,
     chunkname?: string
-): LuaMultiReturn<[() => any] | [undefined, string]>;
+): LuaMultiReturn<[Function] | [undefined, string]>;
 
 /**
  * This function is similar to pcall, except that it sets a new message handler
@@ -76,7 +76,7 @@ declare function loadfile(
  */
  declare function xpcall<R, E>(
     f: () => R,
-    err: (err: any) => E
+    err: (err: unknown) => E
 ): LuaMultiReturn<[true, R] | [false, E]>;
 
 declare namespace math {
@@ -123,16 +123,16 @@ declare namespace string {
       * Returns a binary string containing the values v1, v2, etc. packed (that is,
       * serialized in binary form) according to the format string fmt (see §6.4.2).
       */
-     function pack(fmt: string, ...values: any[]): string;
- 
+     function pack(fmt: string, ...values: unknown[]): string;
+
      /**
       * Returns the values packed in string s (see string.pack) according to the
       * format string fmt (see §6.4.2). An optional pos marks where to start
       * reading in s (default is 1). After the read values, this function also
       * returns the index of the first unread byte in s.
       */
-     function unpack(fmt: string, s: string, pos?: number): LuaMultiReturn<any[]>;
- 
+     function unpack(fmt: string, s: string, pos?: number): LuaMultiReturn<unknown[]>;
+
      /**
       * Returns the size of a string resulting from string.pack with the given
       * format. The format string cannot have the variable-length options 's' or
@@ -152,7 +152,7 @@ declare namespace coroutine {
 }
 
 declare namespace debug {
-    interface FunctionInfo<T extends Function = Function> {
+    interface FunctionInfo<T extends Function> {
         nparams: number;
         isvararg: boolean;
     }
@@ -177,12 +177,12 @@ declare namespace debug {
      * The parameter f may also be a function. In that case, getlocal returns only
      * the name of function parameters.
      */
-    function getlocal(f: Function | number, local: number): LuaMultiReturn<[string, any]>;
+    function getlocal(f: Function | number, local: number): LuaMultiReturn<[string, unknown]>;
     function getlocal(
         thread: LuaThread,
         f: Function | number,
         local: number
-    ): LuaMultiReturn<[string, any]>;
+    ): LuaMultiReturn<[string, unknown]>;
 
     /**
      * Returns a unique identifier (as a light userdata) for the upvalue numbered

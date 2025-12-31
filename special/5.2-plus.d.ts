@@ -1,6 +1,6 @@
 /** @noSelfInFile */
 
-declare let _ENV: Record<string, any>;
+declare let _ENV: Record<string, unknown>;
 
 /**
  * This function is a generic interface to the garbage collector. It performs
@@ -94,7 +94,7 @@ declare namespace table {
      *
      * By default, i is 1 and j is #list.
      */
-    function unpack<T extends any[]>(list: T): LuaMultiReturn<T>;
+    function unpack<T extends unknown[]>(list: T): LuaMultiReturn<T>;
     function unpack<T>(list: T[], i: number, j?: number): LuaMultiReturn<T[]>;
 
     /**
@@ -102,7 +102,7 @@ declare namespace table {
      * with a field "n" with the total number of parameters. Note that the
      * resulting table may not be a sequence.
      */
-    function pack<T extends any[]>(...args: T): T & { n: number };
+    function pack<T extends unknown[]>(...args: T): T & { n: number };
 }
 
 declare namespace os {
@@ -150,13 +150,13 @@ interface LuaMetatable<T> {
      * Handle iteration through table pairs when `for k,v in pairs(tbl) do ...
      * end` is called.
      */
-    __pairs?<T>(t: T): [(t: T, index?: any) => [any, any], T];
+    __pairs?<T>(t: T): [(t: T, index?: unknown) => [keyof T, T[keyof T]], T];
 
     /**
      * Handle iteration through table pairs when `for k,v in ipairs(tbl) do ...
      * end` is called.
      */
-    __ipairs?<T extends object>(t: T): [(t: T, index?: number) => [number, any], T, 0];
+    __ipairs?<T extends object>(t: T): [(t: T, index?: number) => [number, unknown], T, 0];
 }
 
 declare namespace coroutine {

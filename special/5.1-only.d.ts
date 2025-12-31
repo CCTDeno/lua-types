@@ -15,13 +15,13 @@
 declare function load(
     func: () => string | null | undefined,
     chunkname?: string
-): LuaMultiReturn<[() => any] | [undefined, string]>;
+): LuaMultiReturn<[() => unknown] | [undefined, string]>;
 
 /**
  * Similar to load, but gets the chunk from file filename or from the standard
  * input, if no file name is given.
  */
-declare function loadfile(filename?: string): LuaMultiReturn<[() => any] | [undefined, string]>;
+declare function loadfile(filename?: string): LuaMultiReturn<[() => unknown] | [undefined, string]>;
 
 /**
  * Similar to load, but gets the chunk from the given string.
@@ -35,7 +35,7 @@ declare function loadfile(filename?: string): LuaMultiReturn<[() => any] | [unde
 declare function loadstring(
     string: string,
     chunkname?: string
-): LuaMultiReturn<[() => any] | [undefined, string]>;
+): LuaMultiReturn<[() => unknown] | [undefined, string]>;
 
 /**
  * This function is similar to pcall, except that it sets a new message handler
@@ -51,7 +51,7 @@ declare function loadstring(
  */
 declare function xpcall<R, E>(
     f: () => R,
-    err: (err: any) => E
+    err: (err: unknown) => E
 ): LuaMultiReturn<[true, R] | [false, E]>;
 
 declare namespace math {
@@ -88,10 +88,10 @@ declare namespace debug {
      * Variable names starting with '(' (open parentheses) represent internal
      * variables (loop control variables, temporaries, and C function locals).
      */
-    function getlocal(level: number, local: number): LuaMultiReturn<[string, any]>;
+    function getlocal(level: number, local: number): LuaMultiReturn<[string, unknown]>;
     function getlocal(
         thread: LuaThread,
         level: number,
         local: number
-    ): LuaMultiReturn<[string, any]>;
+    ): LuaMultiReturn<[string, unknown]>;
 }

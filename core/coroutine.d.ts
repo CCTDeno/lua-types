@@ -11,7 +11,7 @@ declare namespace coroutine {
      * Creates a new coroutine, with body f. f must be a function. Returns this
      * new coroutine, an object with type "thread".
      */
-    function create(f: (...args: any[]) => any): LuaThread;
+    function create(f: (...args: unknown[]) => unknown): LuaThread;
 
     /**
      * Starts or continues the execution of coroutine co. The first time you
@@ -27,8 +27,8 @@ declare namespace coroutine {
      */
     function resume(
         co: LuaThread,
-        ...val: any[]
-    ): LuaMultiReturn<[true, ...any[]] | [false, string]>;
+        ...val: unknown[]
+    ): LuaMultiReturn<[true, ...unknown[]] | [false, string]>;
 
     /**
      * Returns the status of coroutine co, as a string: "running", if the
@@ -47,11 +47,11 @@ declare namespace coroutine {
      * same values returned by resume, except the first boolean. In case of error,
      * propagates the error.
      */
-    function wrap(f: (...args: any[]) => any): (...args: any[]) => LuaMultiReturn<any[]>;
+    function wrap(f: (...args: unknown[]) => unknown): (...args: unknown[]) => LuaMultiReturn<unknown[]>;
 
     /**
      * Suspends the execution of the calling coroutine. Any arguments to yield are
      * passed as extra results to resume.
      */
-    function yield(...args: any[]): LuaMultiReturn<any[]>;
+    function yield(...args: unknown[]): LuaMultiReturn<unknown[]>;
 }
