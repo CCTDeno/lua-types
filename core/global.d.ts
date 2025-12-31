@@ -12,11 +12,11 @@ type LuaUserdata = { readonly __internal__: unique symbol };
  * Lua version.
  */
 declare const _VERSION:
-    | ('Lua 5.0' | 'Lua 5.0.1' | 'Lua 5.0.2' | 'Lua 5.0.3')
-    | 'Lua 5.1'
-    | 'Lua 5.2'
-    | 'Lua 5.3'
-    | 'Lua 5.4';
+  | ("Lua 5.0" | "Lua 5.0.1" | "Lua 5.0.2" | "Lua 5.0.3")
+  | "Lua 5.1"
+  | "Lua 5.2"
+  | "Lua 5.3"
+  | "Lua 5.4";
 
 /**
  * A global variable (not a function) that holds the global environment (see
@@ -32,8 +32,8 @@ declare const _G: typeof globalThis;
  */
 declare function assert<V>(v: V): Exclude<V, undefined | null | false>;
 declare function assert<V, A extends unknown[]>(
-    v: V,
-    ...args: A
+  v: V,
+  ...args: A
 ): LuaMultiReturn<[Exclude<V, undefined | null | false>, ...A]>;
 
 /**
@@ -42,7 +42,7 @@ declare function assert<V, A extends unknown[]>(
  *
  * Performs a full garbage-collection cycle. This is the default option.
  */
-declare function collectgarbage(opt?: 'collect'): void;
+declare function collectgarbage(opt?: "collect"): void;
 
 /**
  * This function is a generic interface to the garbage collector. It performs
@@ -51,7 +51,7 @@ declare function collectgarbage(opt?: 'collect'): void;
  * Stops automatic execution of the garbage collector. The collector will run
  * only when explicitly invoked, until a call to restart it.
  */
-declare function collectgarbage(opt: 'stop'): void;
+declare function collectgarbage(opt: "stop"): void;
 
 /**
  * This function is a generic interface to the garbage collector. It performs
@@ -59,7 +59,7 @@ declare function collectgarbage(opt: 'stop'): void;
  *
  * Restarts automatic execution of the garbage collector.
  */
-declare function collectgarbage(opt: 'restart'): void;
+declare function collectgarbage(opt: "restart"): void;
 
 /**
  * This function is a generic interface to the garbage collector. It performs
@@ -68,7 +68,7 @@ declare function collectgarbage(opt: 'restart'): void;
  * Sets arg as the new value for the pause of the collector (see §2.5). Returns
  * the previous value for pause.
  */
-declare function collectgarbage(opt: 'setpause', arg: number): number;
+declare function collectgarbage(opt: "setpause", arg: number): number;
 
 /**
  * This function is a generic interface to the garbage collector. It performs
@@ -77,7 +77,7 @@ declare function collectgarbage(opt: 'setpause', arg: number): number;
  * Sets arg as the new value for the step multiplier of the collector (see
  * §2.5). Returns the previous value for step.
  */
-declare function collectgarbage(opt: 'setstepmul', arg: number): number;
+declare function collectgarbage(opt: "setstepmul", arg: number): number;
 
 /**
  * This function is a generic interface to the garbage collector. It performs
@@ -89,7 +89,7 @@ declare function collectgarbage(opt: 'setstepmul', arg: number): number;
  * (in KBytes) had been allocated by Lua. Returns true if the step finished a
  * collection cycle.
  */
-declare function collectgarbage(opt: 'step', arg: number): boolean;
+declare function collectgarbage(opt: "step", arg: number): boolean;
 
 /**
  * Opens the named file and executes its contents as a Lua chunk. When called
@@ -130,7 +130,7 @@ declare function getmetatable<T>(object: T): LuaMetatable<T> | undefined;
  * first nil value.
  */
 declare function ipairs<T>(
-    t: Record<number, T>
+  t: Record<number, T>,
 ): LuaIterable<LuaMultiReturn<[number, NonNullable<T>]>>;
 
 /**
@@ -150,7 +150,10 @@ declare function ipairs<T>(
  * value to a non-existent field in the table. You may however modify existing
  * fields. In particular, you may clear existing fields.
  */
-declare function next<T>(table: T, index?: unknown): LuaMultiReturn<[keyof T, T[keyof T]] | []>;
+declare function next<T>(
+  table: T,
+  index?: unknown,
+): LuaMultiReturn<[keyof T, T[keyof T]] | []>;
 
 /**
  * If t has a metamethod __pairs, calls it with t as argument and returns the
@@ -165,9 +168,11 @@ declare function next<T>(table: T, index?: unknown): LuaMultiReturn<[keyof T, T[
  * traversal.
  */
 declare function pairs<TKey extends AnyNotNil, TValue>(
-    t: LuaTable<TKey, TValue>
+  t: LuaTable<TKey, TValue>,
 ): LuaIterable<LuaMultiReturn<[TKey, NonNullable<TValue>]>>;
-declare function pairs<T>(t: T): LuaIterable<LuaMultiReturn<[keyof T, NonNullable<T[keyof T]>]>>;
+declare function pairs<T>(
+  t: T,
+): LuaIterable<LuaMultiReturn<[keyof T, NonNullable<T[keyof T]>]>>;
 
 /**
  * Calls function f with the given arguments in protected mode. This means that
@@ -178,14 +183,14 @@ declare function pairs<T>(t: T): LuaIterable<LuaMultiReturn<[keyof T, NonNullabl
  * pcall returns false plus the error message.
  */
 declare function pcall<This, Args extends unknown[], R>(
-    f: (this: This, ...args: Args) => R,
-    context: This,
-    ...args: Args
+  f: (this: This, ...args: Args) => R,
+  context: This,
+  ...args: Args
 ): LuaMultiReturn<[true, R] | [false, string]>;
 
 declare function pcall<A extends unknown[], R>(
-    f: (this: void, ...args: A) => R,
-    ...args: A
+  f: (this: void, ...args: A) => R,
+  ...args: A
 ): LuaMultiReturn<[true, R] | [false, string]>;
 
 /**
@@ -207,7 +212,10 @@ declare function rawequal<T>(v1: T, v2: T): boolean;
  * Gets the real value of table[index], without invoking the __index metamethod.
  * table must be a table; index may be any value.
  */
-declare function rawget<T extends object, K extends keyof T>(table: T, index: K): T[K];
+declare function rawget<T extends object, K extends keyof T>(
+  table: T,
+  index: K,
+): T[K];
 
 /**
  * Returns the length of the object v, which must be a table or a string,
@@ -222,7 +230,11 @@ declare function rawlen(v: object | string): number;
  *
  * This function returns table.
  */
-declare function rawset<T extends object, K extends keyof T>(table: T, index: K, value: T[K]): T;
+declare function rawset<T extends object, K extends keyof T>(
+  table: T,
+  index: K,
+  value: T[K],
+): T;
 
 /**
  * If index is a number, returns all arguments after argument number index; a
@@ -238,7 +250,7 @@ declare function select<T>(index: number, ...args: T[]): LuaMultiReturn<T[]>;
  * index must be the string "#", and select returns the total number of extra
  * arguments it received.
  */
-declare function select<T>(index: '#', ...args: T[]): number;
+declare function select<T>(index: "#", ...args: T[]): number;
 
 /**
  * Sets the metatable for the given table. (To change the metatable of other
@@ -249,16 +261,16 @@ declare function select<T>(index: '#', ...args: T[]): number;
  * This function returns table.
  */
 declare function setmetatable<
-    T extends object,
-    TIndex extends object | ((this: T, key: unknown) => unknown) | undefined = undefined
+  T extends object,
+  TIndex extends object | ((this: T, key: unknown) => unknown) | undefined =
+    undefined,
 >(
-    table: T,
-    metatable?: LuaMetatable<T, TIndex> | null
+  table: T,
+  metatable?: LuaMetatable<T, TIndex> | null,
 ): TIndex extends (this: T, key: infer TKey) => infer TValue
-    ? T & { [K in TKey & string]: TValue }
-    : TIndex extends object
-    ? T & TIndex
-    : T;
+  ? T & { [K in TKey & string]: TValue }
+  : TIndex extends object ? T & TIndex
+  : T;
 
 /**
  * When called with no base, tonumber tries to convert its argument to a number.
@@ -293,5 +305,13 @@ declare function tostring(v: unknown): string;
  * Returns the type of its only argument, coded as a string.
  */
 declare function type(
-    v: unknown
-): 'nil' | 'number' | 'string' | 'boolean' | 'table' | 'function' | 'thread' | 'userdata';
+  v: unknown,
+):
+  | "nil"
+  | "number"
+  | "string"
+  | "boolean"
+  | "table"
+  | "function"
+  | "thread"
+  | "userdata";

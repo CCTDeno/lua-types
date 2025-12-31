@@ -1,23 +1,23 @@
 {
-    "$schema": "https://raw.githubusercontent.com/denoland/deno/refs/heads/main/cli/schemas/config-file.v1.json",
-    "name": "@cctweaked/lua-types",
-    "version": "3.13.2",
-    "exports": {
-        ".": "./cc.d.ts",
-        "./5.2": "./cc-5.2.d.ts"
-    },
-    "license": "MIT",
-    "publish": {},
+  "$schema": "https://raw.githubusercontent.com/denoland/deno/refs/heads/main/cli/schemas/config-file.v1.json",
+  "name": "@cctweaked/lua-types",
+  "version": "3.13.2",
+  "exports": {
+    ".": "./cc.d.ts",
+    "./5.2": "./cc-5.2.d.ts"
+  },
+  "license": "MIT",
+  "publish": {},
 
-    "tasks": {},
-    "imports": {
-        "@typescript-to-lua/language-extensions": "npm:@typescript-to-lua/language-extensions@^1.19.0"
-    },
-    "compilerOptions": { "lib": ["esnext"] },
-    "lint": {
-        "rules": {
-            "tags": ["recommended", "jsr"],
-            "exclude": ["ban-types"]
-        }
+  "tasks": {},
+  "imports": {
+    "@typescript-to-lua/language-extensions": "npm:@typescript-to-lua/language-extensions@^1.19.0"
+  },
+  "compilerOptions": { "lib": ["esnext"] },
+  "lint": {
+    "rules": {
+      "tags": ["recommended", "jsr"],
+      "exclude": ["ban-types"]
     }
+  }
 }

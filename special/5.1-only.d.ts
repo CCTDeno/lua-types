@@ -13,15 +13,17 @@
  * When absent, it defaults to "=(load)".
  */
 declare function load(
-    func: () => string | null | undefined,
-    chunkname?: string
+  func: () => string | null | undefined,
+  chunkname?: string,
 ): LuaMultiReturn<[() => unknown] | [undefined, string]>;
 
 /**
  * Similar to load, but gets the chunk from file filename or from the standard
  * input, if no file name is given.
  */
-declare function loadfile(filename?: string): LuaMultiReturn<[() => unknown] | [undefined, string]>;
+declare function loadfile(
+  filename?: string,
+): LuaMultiReturn<[() => unknown] | [undefined, string]>;
 
 /**
  * Similar to load, but gets the chunk from the given string.
@@ -33,8 +35,8 @@ declare function loadfile(filename?: string): LuaMultiReturn<[() => unknown] | [
  * When absent, chunkname defaults to the given string.
  */
 declare function loadstring(
-    string: string,
-    chunkname?: string
+  string: string,
+  chunkname?: string,
 ): LuaMultiReturn<[() => unknown] | [undefined, string]>;
 
 /**
@@ -50,48 +52,51 @@ declare function loadstring(
  * false plus the result from err.
  */
 declare function xpcall<R, E>(
-    f: () => R,
-    err: (err: unknown) => E
+  f: () => R,
+  err: (err: unknown) => E,
 ): LuaMultiReturn<[true, R] | [false, E]>;
 
 declare namespace math {
-    /**
-     * Returns the logarithm of x.
-     */
-    function log(x: number): number;
+  /**
+   * Returns the logarithm of x.
+   */
+  function log(x: number): number;
 }
 
 declare namespace string {
-    /**
-     * Returns a string that is the concatenation of n copies of the string s.
-     */
-    function rep(s: string, n: number): string;
+  /**
+   * Returns a string that is the concatenation of n copies of the string s.
+   */
+  function rep(s: string, n: number): string;
 }
 
 declare namespace os {
-    /**
-     * Calls the C function exit, with an optional code, to terminate the host
-     * program. The default value for code is the success code.
-     */
-    function exit(code?: number): never;
+  /**
+   * Calls the C function exit, with an optional code, to terminate the host
+   * program. The default value for code is the success code.
+   */
+  function exit(code?: number): never;
 }
 
 declare namespace debug {
-    /**
-     * This function returns the name and the value of the local variable with
-     * index local of the function at level level of the stack. (The first
-     * parameter or local variable has index 1, and so on, until the last active
-     * local variable.) The function returns nil if there is no local variable
-     * with the given index, and raises an error when called with a level out of
-     * range. (You can call debug.getinfo to check whether the level is valid.)
-     *
-     * Variable names starting with '(' (open parentheses) represent internal
-     * variables (loop control variables, temporaries, and C function locals).
-     */
-    function getlocal(level: number, local: number): LuaMultiReturn<[string, unknown]>;
-    function getlocal(
-        thread: LuaThread,
-        level: number,
-        local: number
-    ): LuaMultiReturn<[string, unknown]>;
+  /**
+   * This function returns the name and the value of the local variable with
+   * index local of the function at level level of the stack. (The first
+   * parameter or local variable has index 1, and so on, until the last active
+   * local variable.) The function returns nil if there is no local variable
+   * with the given index, and raises an error when called with a level out of
+   * range. (You can call debug.getinfo to check whether the level is valid.)
+   *
+   * Variable names starting with '(' (open parentheses) represent internal
+   * variables (loop control variables, temporaries, and C function locals).
+   */
+  function getlocal(
+    level: number,
+    local: number,
+  ): LuaMultiReturn<[string, unknown]>;
+  function getlocal(
+    thread: LuaThread,
+    level: number,
+    local: number,
+  ): LuaMultiReturn<[string, unknown]>;
 }
