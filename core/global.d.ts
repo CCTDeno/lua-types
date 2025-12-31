@@ -1,7 +1,5 @@
 // Based on https://www.lua.org/manual/5.3/manual.html#6.1
 
-/// <reference lib="es2015.iterable" />
-
 /** @noSelfInFile */
 
 type LuaThread = { readonly __internal__: unique symbol };
